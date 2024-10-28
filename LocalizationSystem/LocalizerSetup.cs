@@ -24,8 +24,7 @@ namespace LocalizationSystem
                 {
                     Console.Error.WriteLine(ex);
                 }
-            }
-
+            }      
 
             LoadLocalizationData(filePath);
 
@@ -34,7 +33,15 @@ namespace LocalizationSystem
         private static void LoadLocalizationData(string fp)
         {
             var json = File.ReadAllText(fp);
-            Localizer.localizationData = JsonSerializer.Deserialize<List<LocalizationModel>>(json);
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                Localizer.localizationData = JsonSerializer.Deserialize<List<LocalizationModel>>(json);
+            }
+            else
+            {
+                throw new Exception("Globalization.json dosyasi bos oldugu icin okunamiyor.");
+            }
+
         }
 
         private static List<LocalizationModel> CreateExampleData()

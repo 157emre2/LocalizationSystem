@@ -1,12 +1,12 @@
 ﻿namespace LocalizationSystem
 {
-    public class LocalizationModel
+    internal class LocalizationModel
     {
         public string Key { get; set; }
         public List<LocalizationValue> Values { get; set; }
     }
 
-    public class LocalizationValue
+    internal class LocalizationValue
     {
         public string Lang { get; set; }
         public string Value { get; set; }

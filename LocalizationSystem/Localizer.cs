@@ -2,12 +2,25 @@
 {
     public static class Localizer
     {
-        public static List<LocalizationModel> localizationData;
+        internal static List<LocalizationModel> localizationData;
 
 
         public static string Localize(this string key, string lang)
         {
-            return localizationData.FirstOrDefault(x => x.Key == key)?.Values.FirstOrDefault(x => x.Lang == lang)?.Value;
+            var res = localizationData.FirstOrDefault(x => x.Key == key)?.Values.FirstOrDefault(x => x.Lang == lang)?.Value;
+            if (string.IsNullOrWhiteSpace(res))
+                res = $"{key}, {lang} dilinde bulunamadi.";
+
+            return res;
+        }
+
+        public static string Localize(this string key)
+        {
+            string lang = LanguageSettings.CurrentLanguage;
+            var res = localizationData.FirstOrDefault(x => x.Key == key)?.Values.FirstOrDefault(x => x.Lang == lang)?.Value;
+            if (string.IsNullOrWhiteSpace(res))
+                res = $"{key}, {lang} dilinde bulunamadi.";
+            return res;
         }
     }
 }
