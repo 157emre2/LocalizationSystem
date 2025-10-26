@@ -2,12 +2,12 @@
 
 namespace LocalizationSystem
 {
-    public static class LocalizerSetup
+    public class LocalizerSetup
     {
 
-        public static void SetupLocalize()
+        public static void SetupLocalize(string dizin)
         {
-            string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Globalization.json");
+            string filePath = Path.Combine(dizin, "Globalization.json");
             var exData = CreateExampleData();
 
             if (!File.Exists(filePath))
